@@ -82,4 +82,111 @@
 //         console.log(`${i} * ${j} = ${i*j}`)
 //     }
 // }
+
+
+// // ----- quiz 4 สร้าง HI LO โดยใช้ เต๋า 3 ลูก (มีแต้ม 1ถึง6)
+// สร้างตัวแปร isHeight (boolean)
+// 11 แต้มผู้เล่นแพ้ มากกว่า 11 แต้ม คือสูง
+// น้อยกว่า 11 แต้ม ต่ำ
+// ทำการทอยเต๋า (สุ่ม) และทำการแสดงผลว่าผู้เล่นชนะหรือแพ้
+// // try
+// import readline from 'readline/promises';
+// import { stdin as input, stdout as output } from 'process';
+
+// const rl = readline.createInterface({ input, output });
+
+// let toTalCount = 0;
+// let dictResult;
+// let predict = await rl.question("HI or Lo: ");
+
+// for (let i = 0 ; i < 3 ; i ++){
+//     let randomDict = Math.ceil(Math.random() * 6); // ปัดขึ้น 1-6 or total += Math.ceil(Math.random() * 6);
+//     console.log(randomDict);
+//     toTalCount += randomDict
+// }
+// if (toTalCount == 11){
+//     console.log("user lose")
+// }
+// else if (toTalCount > 11){
+//     dictResult = "HI";
+// }
+// else{
+//     dictResult = "Lo";
+// }
+// console.log(toTalCount)
+
+// if (predict == dictResult){
+//     console.log("user win")
+// }
+// else{
+//     console.log("user lose")
+// }
+
+// ai improve
+import readline from 'readline/promises';
+import { stdin as input, stdout as output } from 'process';
+
+const rl = readline.createInterface({ input, output });
+
+console.log("=== ยินดีต้อนรับสู่เกมไฮโล (Hi-Lo) ===");
+console.log("พิมพ์ 'EXIT' ในช่องทายเพื่อออกจากเกม\n");
+
+// ใช้ Loop เพื่อให้รองรับการเล่นซ้ำๆ ได้เรื่อยๆ
+while (true) {
+    let predict = "";
+
+    // Loop ดักจับ Input จนกว่าจะได้ค่าที่ถูกต้อง
+    while (true) {
+        let inputRaw = await rl.question("ทายผล (HI หรือ LO): ");
+        predict = inputRaw.trim().toUpperCase(); // ตัดช่องว่าง + แปลงเป็นตัวใหญ่ทั้งหมด
+
+        if (predict === "EXIT") {
+            console.log("ขอบคุณที่ร่วมสนุกครับ! 👋");
+            rl.close();
+            process.exit(0); // สั่งจบโปรแกรมทันที
+        }
+
+        if (predict === "HI" || predict === "LO") {
+            break; // ได้ค่าที่ถูกต้องแล้ว ทะลุลูปออกไปคำนวณผล
+        }
+
+        console.log("❌ กรุณากรอกเฉพาะ 'HI' หรือ 'LO' เท่านั้น (หรือ 'EXIT' เพื่อออก)");
+    }
+
+    // ทอยลูกเต๋า 3 ลูก
+    let totalCount = 0;
+    console.log("\n🎲 กำลังทอยลูกเต๋า...");
     
+    for (let i = 0; i < 3; i++) {
+        let randomDice = Math.ceil(Math.random() * 6);
+        console.log(`ลูกที่ ${i + 1}: [ ${randomDice} ]`);
+        totalCount += randomDice;
+    }
+    
+    console.log(`แต้มรวมทั้งหมด: ${totalCount} แต้ม`);
+
+    // คำนวณผลลัพธ์ตามกติกาไฮโลที่ถูกต้อง
+    let diceResult = "";
+    if (totalCount === 11) {
+        diceResult = "11-HI-LO"; // แต้ม 11 คือเจ้ามือเน้นๆ
+    } else if (totalCount > 11) {
+        diceResult = "HI";
+    } else {
+        diceResult = "LO";
+    }
+
+    // ตรวจสอบและแสดงผลลัพธ์
+    if (diceResult === "11-HI-LO") {
+        console.log("💥 ผลออก '11 ไฮโล'! (เจ้ามือรับกินเรียบ ยูสเซอร์แพ้ทั้งหมด)");
+        console.log("🔴 User Lose!\n");
+    } else if (predict === diceResult) {
+        console.log(`🎉 ผลออก '${diceResult}' ตรงกับที่คุณทาย!`);
+        console.log("🟢 User Win!\n");
+    } else {
+        console.log(`😢 ผลออก '${diceResult}' แต่คุณทาย '${predict}'`);
+        console.log("🔴 User Lose!\n");
+    }
+
+    // คั่นรอบเพื่อความสวยงาม
+    console.log("-------------------------------------------\n");
+}
