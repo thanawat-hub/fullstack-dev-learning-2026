@@ -1,0 +1,25 @@
+import readline from 'readline/promises';
+import { stdin as input, stdout as output } from 'process';
+
+const rl = readline.createInterface({ input, output });
+
+let password = "123";
+
+// สร้างฟังก์ชันเพื่อให้สามารถใช้ async/await ในการรอผู้ใช้พิมพ์ได้
+async function checkPassword() {
+    do {
+        // ใช้ rl.question ทำหน้าที่แทน prompt()
+        password = await rl.question("กรุณากรอกรหัสผ่าน: ");
+    } while (password !== "1234");
+
+    console.log("เข้าสู่ระบบสำเร็จ!");
+    rl.close(); // ปิดการรับค่า
+}
+
+checkPassword();
+
+// เทียบกับจากเดิมแค่เขียนว่า prompt ก็จะได้เลย ถ้าทำใน html tag <script>
+// let password = "";
+// do {
+//     password = prompt("กรุณากรอกรหัสผ่าน:");
+// } while (password !== "1234");
