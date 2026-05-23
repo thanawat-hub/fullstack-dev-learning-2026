@@ -4,6 +4,17 @@
 var name = "Tor";
 console.log("Hello", name);
 
+
+// multi line
+const emailTemplate = `
+สวัสดีคุณลูกค้า,
+
+ขอบคุณที่ใช้บริการของเรา
+ทีมงานจะติดต่อกลับไปโดยเร็วที่สุด
+`;
+console.log(emailTemplate);
+
+
 // ====== var
 var firstName = "Thanawat";
 var lastName = "Boon";
@@ -11,7 +22,6 @@ var lastName = "Boon";
 
 // fullnameeeeeeeeeee = 'Thhhhhhhh' // ถ้า comment ตัว use strcit จะทำให้ ใช้ได้ ซึ่งไม่ควรปล่อยให้เป็นประมาณนี้ | default จะเป็น var ควรใช้ let เพราะจะได้รูว่าอะไรประกาศไปแล้ว
 // console.log(fullnameeeeeeeeeee)
-
 
 // ====== let
 // let lastName = "Boonya" => ประกาศซ้ำไม่ได้ ควรใช้เพื่อให้รู้
