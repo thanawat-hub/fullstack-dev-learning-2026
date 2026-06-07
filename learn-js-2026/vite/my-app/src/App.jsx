@@ -25,7 +25,7 @@ function App() {
       <h1> This text is passing vairbles {message}</h1>
       <p> Result of 5 + 3 is : {cal(5,3)}</p>
       <Card/>
-      <Card img="src/assets/Screenshot-2.png" title="Card Title 2" description="This is the second card"/>
+      <Card img="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" title="Card Title 2" description="This is the second card"/>
     </div>
   )
 }
