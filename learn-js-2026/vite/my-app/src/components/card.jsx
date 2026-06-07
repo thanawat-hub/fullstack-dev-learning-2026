@@ -1,6 +1,9 @@
 import hero from '../assets/hero.png'
 
-function Card(){
+function Card(props, children) {
+    console.log(props);
+    console.log();
+    console.log(props.title);
     const styleBody = {
         backgroundColor : 'red',
     }
