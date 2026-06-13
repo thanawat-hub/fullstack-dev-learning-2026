@@ -1,69 +1,69 @@
 import Card from './Card'
-import {users} from '../data/users' // import only attribute ใช้ => {object}
+import { users } from '../data/users' // import only attribute ใช้ => {object}
 // import * as DataUsers
 // import keyword default มีเงื่อนไข ชื่อต้องตรงกัน
 import { useState } from 'react'; // import useState เพื่อใช้ state ใน component นี้ ให้ re-render เมื่อมีการเปลี่ยนแปลงค่า
 
-export default function Users({}) { //1 เริ่ม
+export default function Users({ }) { //1 เริ่ม
 
     const className = {
         button: 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow',
         buttonLike: 'bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow'
     }
-    
-    const [count, setCount] = useState(0);
+
+    const [usersState, setUsersState] = useState(users); //สร้าง state สำหรับเก็บข้อมูล users โดยใช้ useState และกำหนดค่าเริ่มต้นเป็น users ที่เรา import มา
     const clickHandler = (user) => {
-        console.log('Clicked');
-        // alert(`You liked ${user.name}'s profile!`)
-        setCount(count + 1); // this is tricky เหมือนว่าไม่ได้เก็บค่าเดิมไว้ (ประมาณว่า render ใหม่พร้อมกับมันแอดค่านั้นมาพร้อมกัน) และเรื่อง state ต้องการสอนการเก็บค่าเก่าไว้ 
-        // why user folloowrs is updated when count update
-        // Because user.followers += 1 directly changes the same user object from the users array.
-        user.followers += 1
-    }
+        // increse followers of user by 1 when click like button
+        console.log(user.followers);
+        // แบบที่ 1 
+        // setUsersState(usersState.map(u => {
+        // if (u.id === user.id) {
+        //     return {
+        //     ...u,
+        //     followers: u.followers + 1
+        //     }
+        // }
+        // return u;
+        // }))
 
-    const mouseOverHandler = (event) => {
-        event.currentTarget.classList.add('scale-125', 'bg-blue-600')
-    }
-    const mouseOutHandler = (event) => {
-        event.currentTarget.classList.remove('scale-125', 'bg-blue-600')
-    }
 
+        // // แบบที่ 2 concept เหมือนกันคือหา index ก่อนแล้วค่อยแก้ไข แต่จะไม่แก้ไขตัวเดิมโดยตรง แต่จะสร้าง copy ของ users มาใหม่ เพื่อไม่ให้ไปแก้ไขตัวเดิมโดยตรง เพราะถ้าแก้ไขตัวเดิมโดยตรง React จะไม่รู้ว่า state เปลี่ยนแปลงแล้ว และจะไม่ re-render component
+        const userIdx = users.findIndex(u => u.id === user.id); // หา index ว่าอยู่ช่องไหนของ array users
+        const newUsers = [...users]; // สร้าง copy ของ users มาใหม่ และแก้ไขใน copy แทนที่จะไปแก้ไขตัวเดิมโดยตรง
+        newUsers[userIdx].followers += 1; // +1 ไปที่ index ตัวนั้น
+        setUsersState([...usersState]);
+        console.log(newUsers[userIdx].followers);
+    }
+    const mouseOverHandler = (e) => {
+        e.target.className = className.button + ' scale-125 cursor-pointer'
+    }
+    const mouseLeaveHandler = (e) => {
+        e.target.className = className.button
+    }
     return (
         <div>
-            {/* <Card imgUrl={""} title={"Testing"} description={''}>
-                <button className={className.buttonLike}> 
-                    Like
-                </button> 
-            </Card> */}
             <h1>Users</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-              {
-                // console.log(users);
-                users.map(user => (
-                    <Card 
-                        key={user.id} 
-                        title={user.name}
-                        imgUrl={user.avatar}  
-                        description={user.bio}>
-                        {/* <button className={className.button}>
-                            Watch
-                        </button> */}
-                        {/* ต้องการให้ เมื่อเม้า on button ห้ามใช้ hover และ
-                        button ใหญ่กว่าเดิม 1.25 เท่า และเป็นสีน้ำเงิน */}
-                        <button
-                            onMouseOver={mouseOverHandler}
-                            onMouseOut={mouseOutHandler}
-                            onClick={() => clickHandler(user)}
-                            className={className.buttonLike}>
-                            Like {user.followers}
-
-                        </button>
-                    </Card>
-                ))
-              } 
+            <div className='grid grid-cols-2 gap-2'>
+                {
+                    usersState.map(user => (
+                        <Card
+                            key={user.id}
+                            title={user.name}
+                            imgUrl={user.avatar}
+                            description={user.bio}>
+                            <button
+                                onMouseOver={(event) => mouseOverHandler(event)}
+                                onMouseLeave={(event) => mouseLeaveHandler(event)}
+                                onClick={() => clickHandler(user)}
+                                // onClick={clickHandler(user)} // wrong
+                                className={className.button}>
+                                Like {user.followers}
+                            </button>
+                        </Card>
+                    ))
+                }
             </div>
         </div>
-    )
+    );
 }
-
 // เวลาใช้ก็เรียกผ่าน <Users> เพราะเป็นชื่อของ component ที่เรา export ออกมา
