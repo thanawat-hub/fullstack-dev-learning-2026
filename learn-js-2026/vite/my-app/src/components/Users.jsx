@@ -14,7 +14,7 @@ export default function Users({}) { //1 เริ่ม
     const [count, setCount] = useState(0);
     const clickHandler = (user) => {
         console.log('Clicked');
-        alert(`You liked ${user.name}'s profile!`)
+        // alert(`You liked ${user.name}'s profile!`)
         setCount(count + 1);
         user.followers += 1
     }
