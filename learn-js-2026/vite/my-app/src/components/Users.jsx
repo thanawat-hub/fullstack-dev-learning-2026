@@ -3,6 +3,7 @@ import { users } from '../data/users' // import only attribute ใช้ => {obj
 // import * as DataUsers
 // import keyword default มีเงื่อนไข ชื่อต้องตรงกัน
 import { useState } from 'react'; // import useState เพื่อใช้ state ใน component นี้ ให้ re-render เมื่อมีการเปลี่ยนแปลงค่า
+import UserPanel from './UserPanel';
 
 export default function Users({ }) { //1 เริ่ม
 
@@ -34,6 +35,12 @@ export default function Users({ }) { //1 เริ่ม
         setUsersState([...usersState]);
         console.log(newUsers[userIdx].followers);
     }
+
+    const onSearchHandler = (value) => {
+        console.log(value)
+        setUsersState(users.filter(user => user.name.toLowerCase().includes(value.toLowerCase())));
+    }
+
     const mouseOverHandler = (e) => {
         e.target.className = className.button + ' scale-125 cursor-pointer'
     }
@@ -43,6 +50,9 @@ export default function Users({ }) { //1 เริ่ม
     return (
         <div>
             <h1>Users</h1>
+            <UserPanel 
+              searchHandler={ (value) => onSearchHandler(value)}
+            />
             <div className='grid grid-cols-2 gap-2'>
                 {
                     usersState.map(user => (
