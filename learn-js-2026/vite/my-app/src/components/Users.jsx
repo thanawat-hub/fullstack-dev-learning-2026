@@ -15,7 +15,9 @@ export default function Users({}) { //1 เริ่ม
     const clickHandler = (user) => {
         console.log('Clicked');
         // alert(`You liked ${user.name}'s profile!`)
-        setCount(count + 1);
+        setCount(count + 1); // this is tricky เหมือนว่าไม่ได้เก็บค่าเดิมไว้ (ประมาณว่า render ใหม่พร้อมกับมันแอดค่านั้นมาพร้อมกัน) และเรื่อง state ต้องการสอนการเก็บค่าเก่าไว้ 
+        // why user folloowrs is updated when count update
+        // Because user.followers += 1 directly changes the same user object from the users array.
         user.followers += 1
     }
 
