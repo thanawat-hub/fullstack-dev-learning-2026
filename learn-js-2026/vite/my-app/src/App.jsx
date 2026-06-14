@@ -15,11 +15,11 @@ function App() {
   return (
     <div style={appStyle} className="mt-10">
       {/* <WelcomeMessage /> */}
-      {/* <Users/> */}
+      <Users/>
       {/* <Counter/> */}
       {/* <Timer/> */}
-      {/* <Product /> */}
-      <ProductFecth />
+      {/* <Product /> ไม่ใช้แล้ว */}
+      {/* <ProductFecth /> */}
     </div>
   );
 }

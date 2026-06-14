@@ -7,9 +7,12 @@ import UserPanel from './UserPanel';
 
 export default function Users({ }) { //1 เริ่ม
 
+    // steps 2 ใส่สี แต่ง
     const className = {
         button: 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow',
-        buttonLike: 'bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow'
+        buttonLike: 'bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow',
+        buttonDelete: 'bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow',
+
     }
 
     const [usersState, setUsersState] = useState(users); //สร้าง state สำหรับเก็บข้อมูล users โดยใช้ useState และกำหนดค่าเริ่มต้นเป็น users ที่เรา import มา
@@ -47,6 +50,28 @@ export default function Users({ }) { //1 เริ่ม
     const mouseLeaveHandler = (e) => {
         e.target.className = className.button
     }
+
+    // step 3 ใส่ logic
+    const onDelete = (user) => {
+        // 1. เป็นการใช้ตัวแปรในการทำ
+        // // console.log(user)
+        // const userIdx = usersState.findIndex(u => u.id === user.id);
+        // const newUsersState = usersState.slice()
+        // console.log(newUsersState)
+        // newUsersState.splice(userIdx, 1);
+        // setUsersState(newUsersState);
+        // or 2. กรองเอาเฉพาะคนที่มี ID ไม่ตรงกับคนที่จะลบ (คนที่จะลบจะโดนคัดออกไปโดยอัตโนมัติ)
+        // const newUsersState = usersState.filter(u => u.id !== user.id);
+        // setUsersState(newUsersState);
+
+        // ท่าการใช้ prev เขียนแบบนี้เป็น best practices 
+        // prev คือ prevUsers คือ array ปัจจุบัน
+        // filter สร้าง array ใหม่
+        setUsersState((prevUsers) =>
+            prevUsers.filter((item) => item.id !== user.id) // เก็บเฉพาะที่ไม่ใช่ user ที่ต้องการลบ
+            );
+    }
+
     return (
         <div>
             <h1>Users</h1>
@@ -68,6 +93,11 @@ export default function Users({ }) { //1 เริ่ม
                                 // onClick={clickHandler(user)} // wrong
                                 className={className.button}>
                                 Like {user.followers}
+                            </button>
+                            {/* // steps 1 ใส่ button ใน ตำแหน่งที่ต้องการ*/}
+                            <button className={className.buttonDelete}
+                                onClick={() => onDelete(user)}>
+                                Delete
                             </button>
                         </Card>
                     ))
