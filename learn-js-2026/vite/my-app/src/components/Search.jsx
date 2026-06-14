@@ -19,7 +19,7 @@ export default function Search({onSearch, matched}) {
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <div className="align-start">
-                <p>Match: {matched} </p>
+                <p className="text-blue-600">Match: {matched}</p>
             </div>
         </div>
     )

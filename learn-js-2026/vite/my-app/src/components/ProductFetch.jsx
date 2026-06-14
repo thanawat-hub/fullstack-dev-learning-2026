@@ -88,8 +88,8 @@ export default function Products() {
         panel: 'border rounded-2xl shadow-md bg-white p-6 my-4 text-left',
         panelH3: 'text-2xl font-bold mb-4 text-black',
         panelImg: 'w-full h-64 object-cover mb-4 rounded-lg',
-        panelDescription: 'text-gray-700 mb-4',
-        panelPlaceholder: 'text-gray-400'
+        panelDescription: 'text-blue-700 mb-4',
+        panelPlaceholder: 'text-blue-400'
     }
 
     const onSearch = (value) => {
