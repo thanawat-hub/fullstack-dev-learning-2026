@@ -1,21 +1,26 @@
+// shared search component
 import { useState } from "react"
 
-export default function Search({onSearchHandler}) {
-    const [inputValue, setInputValue] = useState(''); // string แล้วแต่จะกำหนด บางครั้งก็ array ,null ขึ้นกับ data ตัวนี้ไว้สำหรับให้เขียน search ได้
-
-    const onChangeHandler = (value) => {
-        setInputValue(value);
-        onSearchHandler(value);
+// shared search component
+export default function Search({onSearch, matched}) {
+    const [value, setValue] = useState('');
+    const changeHandler = (value) => {
+        setValue(value);
+        onSearch(value);
     }
-
     return (
-        <div className="bg-white p-4 rounded-lg shadow flex gap-2">
+        <div className="bg-white p-4 rounded-lg shadow flex flex-col gap-2">
             <input
                 type="text"
                 name="search"
+                // value={value}
+                // onChange={(e) => changeHandler(e.target.value)}
+                onChange={(e) => onSearch(e.target.value)}
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                onChange={(e) => onChangeHandler(e.target.value)}
             />
+            <div className="align-start">
+                <p>Match: {matched} </p>
+            </div>
         </div>
     )
 }
