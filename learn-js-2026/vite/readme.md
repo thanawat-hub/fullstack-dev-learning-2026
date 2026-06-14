@@ -23,3 +23,14 @@ app.jsx
 ```
 npm install tailwindcss @tailwindcss/vite
 ```
+
+
+คือถ้าใช้บน codespaces ถ้าเคลีย แปลว่า เรา push แบบ ignore node_modules ทำให้เราต้องมา 
+@ path 
+```
+cd learn-js-2026/vite/my-app
+```
+```
+npm install
+npm run dev
+```
