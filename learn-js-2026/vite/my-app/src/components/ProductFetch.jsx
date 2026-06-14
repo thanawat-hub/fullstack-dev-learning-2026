@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "./Card"
+import Search from "./Search"
 
 export default function Effects() {
     const [products, setProduct] = useState([]); // step 1 ประกาศค่า default เพราะถ้า ขอข้อมูล (API) แปลว่าต้องรอ request ก่อน
     const [selectedProduct, setSelectedProduct] = useState([null]); // default ให้เป็น null
-    
+    const [FileteredProducts, setFileteredProducts] = useState([null])
     // สร้าง function ใหม่ ก็ไม่ใช้บรรทัดที่ onClick={() => setSelectedProduct(product)} 
     // จะเป็น handleDetail แทน และไม่ต้องมีบรรทัดที่ 22
     // const handleDetail = (product) => {
@@ -24,10 +25,17 @@ export default function Effects() {
         
     }, []);
 
+    const onSearchHandler = (value) => {
+        console.log(value)
+    }
+
     // step 1 simples debug infor ใน pre tag จากค่าที่เราประกาศ in step 1
     return (
         <div>
             <h1>Products</h1>
+            {/* โจทย์ บ่ายคือ ทำ search product เรื่อง paren and children*/}
+            <Search onSearchHandler={onSearchHandler} />
+
             {/* โจทย์ต่อไป ต่อบ่ายให้ กด detail แล้วแสดงผลที่ search bar ตรงนี้ */}
             <div className='border rounded-2xl shadow-md bg-white p-6 my-4 text-left'>
                 {/* <p className='text-gray-400'>Show product detail when select</p> */}
