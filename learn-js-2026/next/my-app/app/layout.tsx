@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { prompt, sarabun } from "./ui/font";
 import "./globals.css";
+// import "./_components/Navbar" To-do Watiing to fix bug  
 
 export const metadata: Metadata = {
   title: "Create Next App",
