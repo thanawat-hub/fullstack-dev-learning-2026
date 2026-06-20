@@ -1,21 +1,14 @@
+"use server"; //ปกติมัน default เป็น server อยู่แล้ว การเขียนก็เป็นการเตือนตัวเราที่ดีเหมือนกันนะ
 
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
-import supabase from "./libs/supabase"
 
 export default async function Home() {
-  // ท่าแบบ server side redering
-  let artists = []
-  const {data} = await supabase.from('songs').select('*')
-  console.log(data)
-  artists = [...data];
+  // ท่าแบบ server side redering => ย้ายไปอีก route
   
   return (
     <>
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
       {/* Hero Section */}
       <div className="relative w-full h-[400px]">
       <Image //นิยใช้ tag นี้มากว่า img เพราะรองรับ Lazy loading 
