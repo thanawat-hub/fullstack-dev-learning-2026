@@ -1,59 +1,64 @@
-import { useEffect, useState } from "react";
+import Image from "next/image";
 
-export default function Effects() {
-    const [products, setProducts] = useState([]);
-    const [users, setUsers] = useState([]);
-    const addProduct = () => {
-        setProducts(prev => [
-            ...prev,
-            { 
-                idx: prev.length + 1,
-                price: Math.floor(Math.random() * 100)
-            }
-        ]);
-    }
-    const addUser = () => setUsers(prev => [...prev, {name: 'xxx'}])
+const routes = [
+  { name: "Home", href: "/" },
+  { name: "Users", href: "/users" },
+  { name: "Products", href: "/products" },
+];
 
-    // Not work proper
-    // setTimeout(() => addProduct(), 2000);
+const user = {
+  name: "Alex Rivera",
+  avatarUrl: "https://i.pravatar.cc/64?img=12",
+};
 
-    // run every render
-    useEffect(() => {
-        console.log('Every time');
-    })
-    // run only first component loaded
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            addProduct()
-            setUsers(prev => [...prev, {name: 'xxx'}])
-        }, 3000);
-        // destroy when unmount
-        return () => clearTimeout(timer);
-    }, []);
-    // run when dependencies changes
-    useEffect(() => {
-        console.log('Product');
-    }, [products]);
+function Logo() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path
+        d="M3 20c4-8 11-8 15 0s11 8 15 0"
+        stroke="#818cf8"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 12c4-8 11-8 15 0s11 8 15 0"
+        stroke="#6366f1"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
-    return (
-        <div>
-            <h2>Products</h2>
-            <button
-                onClick={() => addProduct()}
-                className="px-4 py-2 mr-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-                +Product
-            </button>
-            <button
-                onClick={() => addUser()}
-                className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition-colors">
-                +User
-            </button>
-            <pre className="bg-gray-900 text-green-400 text-sm rounded p-4 mt-2 overflow-auto text-left">
-                {JSON.stringify(products, null, 2)}
-            </pre>
-            <pre className="bg-gray-900 text-green-400 text-sm rounded p-4 mt-2 overflow-auto text-left">
-                {JSON.stringify(users, null, 2)}
-            </pre>
-        </div>
-    );
+export default function Navbar() {
+  return (
+    <nav className="bg-slate-900 text-slate-300 px-6 py-3 flex items-center justify-between">
+      <div className="flex items-center gap-8">
+        <Logo />
+        <ul className="flex items-center gap-1">
+          {routes.map((route) => (
+            <li key={route.href}>
+              <a
+                href={route.href}
+                className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:text-white"
+              >
+                {route.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <Image
+          src={user.avatarUrl}
+          alt={user.name}
+          width={32}
+          height={32}
+          unoptimized
+          className="rounded-full"
+        />
+      </div>
+    </nav>
+  );
 }

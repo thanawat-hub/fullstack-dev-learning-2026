@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { prompt, sarabun } from "./ui/font";
 import "./globals.css";
-// import "./_components/Navbar" To-do Watiing to fix bug  
+import Navbar from "./_components/Navbar"; // import component (ไม่ใช่แค่ไฟล์)
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en" className={`${prompt.variable} h-full antialiased`}> 
     {/* เปลี่ยนตัวแปรตรงนี้ได้เลย */}
       <body className={`${prompt.className} min-h-full flex flex-col`}>
-        {/* สลับเป็น prompt: เปลี่ยน sarabun → prompt ข้างบน */}
+        {/* Navbar อยู่ใน layout = แสดงทุกหน้า */}
+        <Navbar />
+        {/* children = หน้าที่เปลี่ยนไปตาม route */}
         {children}
       </body>
     </html>
