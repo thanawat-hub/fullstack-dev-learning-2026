@@ -13,7 +13,7 @@ export default function Home() {
         // or fixed size
         // width={3840}
         // height="2160"
-        src="/danmachi.jpg"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
+        src="/cover.jpg"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
         alt="Danmachi Cover"
         fill  // เติมให้เต็ม container (ต้องมี parent เป็น relative)
         className="object-cover" // crop ให้พอดี ไม่บิด
@@ -27,8 +27,8 @@ export default function Home() {
 
         {/* Card รับ children → ปุ่มที่เขียนระหว่าง <Card>...</Card> จะถูกส่งเข้าไปแสดงใน component */}
         <Card
-          imgUrl="/danmachi.jpg"
-          title="Danmachi"
+          imgUrl="/1.jpg"
+          title="Danmachi ss1"
           description="Is It Wrong to Try to Pick Up Girls in a Dungeon?"
         >
           {/* ปุ่มบน: ใช้ Link → navigate แบบ client-side (ไม่ reload หน้า, เร็ว, pre-fetch) */}
@@ -47,7 +47,7 @@ export default function Home() {
 
         <Card
           imgUrl="/danmachi.jpg"
-          title="Season 2"
+          title="Danmachi ss2"
           description="การผจญภัยของเบลในชั้นที่ลึกขึ้น"
         >
           {/* Link: กดแล้วสังเกตว่าหน้าไม่กระพริบ */}
