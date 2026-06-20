@@ -2,8 +2,12 @@
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
+import supabase from "./libs/supabase"
 
-export default function Home() {
+export default async function Home() {
+  const {data} = await supabase.from('songs').select('*')
+  console.log(data)
+  
   return (
     <>
       {/* Hero Section */}
