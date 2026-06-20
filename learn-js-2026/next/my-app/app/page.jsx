@@ -16,7 +16,7 @@ export default async function Home() {
         // or fixed size
         // width={3840}
         // height="2160"
-        src="/danmachi.jpg"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
+        src="/danmachi_charecter.png"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
         alt="Danmachi Cover"
         fill  // เติมให้เต็ม container (ต้องมี parent เป็น relative)
         className="object-cover" // crop ให้พอดี ไม่บิด
@@ -49,8 +49,8 @@ export default async function Home() {
         </Card>
 
         <Card
-          imgUrl="/cover.jpg"
-          title="Danmachi ss2"
+          imgUrl="/danmachi.jpg"
+          title="Danmachi ssX"
           description="การผจญภัยของเบลในชั้นที่ลึกขึ้น"
         >
           {/* Link: กดแล้วสังเกตว่าหน้าไม่กระพริบ */}

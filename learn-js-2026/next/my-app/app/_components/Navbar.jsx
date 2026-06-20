@@ -4,6 +4,7 @@ const routes = [
   { name: "Home", href: "/" },
   { name: "Users", href: "/users" },
   { name: "Products", href: "/products" },
+  { name: "Artists", href: "/artists"}
 ];
 
 const user = {
