@@ -5,11 +5,17 @@ import Card from "./components/Card";
 import supabase from "./libs/supabase"
 
 export default async function Home() {
+  // ท่าแบบ server side redering
+  let artists = []
   const {data} = await supabase.from('songs').select('*')
   console.log(data)
+  artists = [...data];
   
   return (
     <>
+      <pre>
+        {JSON.stringify(data, null, 2)}
+      </pre>
       {/* Hero Section */}
       <div className="relative w-full h-[400px]">
       <Image //นิยใช้ tag นี้มากว่า img เพราะรองรับ Lazy loading 
@@ -17,7 +23,7 @@ export default async function Home() {
         // or fixed size
         // width={3840}
         // height="2160"
-        src="/cover.jpg"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
+        src="/danmachi.jpg"  // มี 3 แบบw webp, png, jpg | ไฟล์ใน folder public/ → เข้าถึงด้วย / โดยตรง
         alt="Danmachi Cover"
         fill  // เติมให้เต็ม container (ต้องมี parent เป็น relative)
         className="object-cover" // crop ให้พอดี ไม่บิด
@@ -50,7 +56,7 @@ export default async function Home() {
         </Card>
 
         <Card
-          imgUrl="/danmachi.jpg"
+          imgUrl="/cover.jpg"
           title="Danmachi ss2"
           description="การผจญภัยของเบลในชั้นที่ลึกขึ้น"
         >
