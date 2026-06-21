@@ -1,17 +1,13 @@
 // there're song detail
 // Add Video Youtube panel
-
 import supabase from "@/app/libs/supabase"
-import songModel from "../../libs/models/song";
+
+import songModel from "../../libs/models/song"; //* import const
 
 export default async function Songs( {params} ) {
     const p = await params;
 
-    const {data, error} = await supabase
-    .from('songs')
-    .select()
-    .eq('id', p.id)
-    .single()
+    const {data, error} = await songModel.getId(id);
 
     const song = data;
     const videoId = song.youtube_url.split('=')[1]
