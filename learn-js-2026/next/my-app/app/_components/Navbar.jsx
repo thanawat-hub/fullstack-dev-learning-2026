@@ -1,4 +1,5 @@
 import Image from "next/image";
+import UserProfile from "../components/UserProfile";
 
 const routes = [
   { name: "Home", href: "/" },
@@ -8,10 +9,6 @@ const routes = [
   { name: "Songs", href: "/songs"}
 ];
 
-const user = {
-  name: "Alex Rivera",
-  avatarUrl: "https://i.pravatar.cc/64?img=12",
-};
 
 function Logo() {
   return (
@@ -52,14 +49,8 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <Image
-          src={user.avatarUrl}
-          alt={user.name}
-          width={32}
-          height={32}
-          unoptimized
-          className="rounded-full"
-        />
+        {/* UserProfile: แสดง avatar + ชื่อจาก GitHub (ถ้า login แล้ว) */}
+        <UserProfile />
       </div>
     </nav>
   );
