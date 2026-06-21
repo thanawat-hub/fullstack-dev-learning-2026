@@ -1,12 +1,12 @@
 "use server"; //ปกติมัน default เป็น server อยู่แล้ว การเขียนก็เป็นการเตือนตัวเราที่ดีเหมือนกันนะ
-
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
+import LoginButton from "./components/LoginButton"
 
 export default async function Home() {
   // ท่าแบบ server side redering => ย้ายไปอีก route
-  
+
   return (
     <>
       {/* Hero Section */}
@@ -20,9 +20,12 @@ export default async function Home() {
         alt="Danmachi Cover"
         fill  // เติมให้เต็ม container (ต้องมี parent เป็น relative)
         className="object-cover" // crop ให้พอดี ไม่บิด
+        style={{ objectPosition: 'center 18%' }} // ปรับ % ได้: 0% = บนสุด, 50% = กลาง, 100% = ล่างสุด
         priority // โหลดทันที ไม่ lazy load (เหมาะกับ hero image)
         />
       </div>
+      {/* LoginButton เป็น Client Component ที่มี onClick อยู่ข้างในแล้ว — แค่วางตรงนี้ */}
+      <LoginButton />
 
       {/* Card List */}
       <div className="p-8">
