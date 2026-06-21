@@ -1,12 +1,24 @@
-"use server"; //ปกติมัน default เป็น server อยู่แล้ว การเขียนก็เป็นการเตือนตัวเราที่ดีเหมือนกันนะ
+// "use server"; //ปกติมัน default เป็น server อยู่แล้ว การเขียนก็เป็นการเตือนตัวเราที่ดีเหมือนกันนะ
+"use client";
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
 import SignInGithub from "./components/signInGithub"
 import SignOutGithub from "./components/signOutGithub"
+import { useState } from 'react';
+import { getUser } from "./libs/authentication"
+import { useEffect } from "react";
 
-export default async function Home() {
+export default function Home() {
   // ท่าแบบ server side redering => ย้ายไปอีก route
+
+  const [stateUser, setStateUser] = useState(null)
+
+  useEffect(() => {
+    getUser().then(user => {
+      setStateUser(user)
+    })
+  })
 
   return (
     <>
@@ -30,6 +42,13 @@ export default async function Home() {
         <SignInGithub />
         <SignOutGithub/>
       </div>
+
+    <pre>
+      {JSON.stringify(stateUser, null, 2)}
+//      JSON.stringify(value, replacer, indent)
+//             ↑        ↑         ↑
+//          ข้อมูล   ไม่ filter  เว้น 2 spaces (อ่านง่าย)
+    </pre>
 
       {/* Card List */}
       <div className="p-8">

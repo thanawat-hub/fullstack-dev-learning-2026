@@ -11,3 +11,8 @@ export async function signInWithGithub() {
   })
   return { data, error }
 }
+
+export async function getUser() {
+  const {data, error } = await supabase.auth.getUser();
+  return data.user;
+}
