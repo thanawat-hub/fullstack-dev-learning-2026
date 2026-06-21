@@ -1,6 +1,5 @@
 // this is a: path param (of artist)
 import supabase from "@/app/libs/supabase"
-import Artists from "../page";
 // import Image from "next/image"
 // // เนื่องจาก next มีความปลอดภัย ต้องมีการ set permission allow fetch image ด้านนอก ตอนนี้ใช้ img ก่อน
 
