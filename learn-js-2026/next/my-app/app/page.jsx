@@ -3,23 +3,14 @@
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
-import SignInGithub from "./components/signInGithub"
-import SignOutGithub from "./components/signOutGithub"
-import { useState } from 'react';
-import { getUser } from "./libs/authentication"
-import { useEffect } from "react";
+import SignConditionGithub from "./components/Condition-signIn"
 
 export default function Home() {
   // ท่าแบบ server side redering => ย้ายไปอีก route
 
-  const [stateUser, setStateUser] = useState(null)
-
-  useEffect(() => {
-    getUser().then(user => {
-      setStateUser(user)
-    })
-  })
-
+//      JSON.stringify(value, replacer, indent)
+//             ↑        ↑         ↑
+//          ข้อมูล   ไม่ filter  เว้น 2 spaces (อ่านง่าย)
   return (
     <>
       {/* Hero Section */}
@@ -39,16 +30,8 @@ export default function Home() {
       </div>
       {/* SignInGithub ใช้ Button ข้างใน — แยก logic ออกจาก UI */}
       <div className="flex justify-center gap-4 my-4">
-        <SignInGithub />
-        <SignOutGithub/>
+        <SignConditionGithub />
       </div>
-
-    <pre>
-      {JSON.stringify(stateUser, null, 2)}
-//      JSON.stringify(value, replacer, indent)
-//             ↑        ↑         ↑
-//          ข้อมูล   ไม่ filter  เว้น 2 spaces (อ่านง่าย)
-    </pre>
 
       {/* Card List */}
       <div className="p-8">
