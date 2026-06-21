@@ -8,7 +8,6 @@ export default async function Songs( {params} ) {
     const {data, error} = await songModel.getId(p.id);
 
     const song = data;
-    console.log(song)
     const videoId = song.youtube_url.split('=')[1]
     // YouTube ให้ thumbnail ฟรีทุกวิดีโอ format: https://img.youtube.com/vi/{VIDEO_ID}/hqdefault.jpg
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
