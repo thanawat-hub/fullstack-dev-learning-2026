@@ -1,15 +1,14 @@
 // there're song detail
 // Add Video Youtube panel
-import supabase from "@/app/libs/supabase"
-
 import songModel from "../../libs/models/song"; //* import const
 
 export default async function Songs( {params} ) {
     const p = await params;
 
-    const {data, error} = await songModel.getId(id);
+    const {data, error} = await songModel.getId(p.id);
 
     const song = data;
+    console.log(song)
     const videoId = song.youtube_url.split('=')[1]
     // YouTube ให้ thumbnail ฟรีทุกวิดีโอ format: https://img.youtube.com/vi/{VIDEO_ID}/hqdefault.jpg
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
