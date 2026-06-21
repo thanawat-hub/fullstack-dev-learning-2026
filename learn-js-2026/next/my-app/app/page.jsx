@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Link from "next/link"; // Link ใช้แทน <a> เพื่อ navigate แบบไม่ reload หน้า (SPA)
 import Card from "./components/Card";
-import LoginButton from "./components/LoginButton"
+import SignInGithub from "./components/signInGithub"
+import SignOutGithub from "./components/signOutGithub"
 
 export default async function Home() {
   // ท่าแบบ server side redering => ย้ายไปอีก route
@@ -24,8 +25,11 @@ export default async function Home() {
         priority // โหลดทันที ไม่ lazy load (เหมาะกับ hero image)
         />
       </div>
-      {/* LoginButton เป็น Client Component ที่มี onClick อยู่ข้างในแล้ว — แค่วางตรงนี้ */}
-      <LoginButton />
+      {/* SignInGithub ใช้ Button ข้างใน — แยก logic ออกจาก UI */}
+      <div className="flex justify-center gap-4 my-4">
+        <SignInGithub />
+        <SignOutGithub/>
+      </div>
 
       {/* Card List */}
       <div className="p-8">
