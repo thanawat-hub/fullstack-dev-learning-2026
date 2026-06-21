@@ -1,12 +1,13 @@
 "use server";
-import supabase from "@/app/libs/supabase"
 import Card from "@/app/components/Card"
 import Link from "next/link"
+import artistModel from "../libs/models/artist";
 
 export default async function Artists () {
     let artists = []
-    const {data} = await supabase.from('songs').select('*')
+    const {data, error} = await artistModel.getAll();
     artists = [...data];
+    console.log(artists)
     return (
     // <pre>
     //     {JSON.stringify(data, null, 2)}
@@ -19,9 +20,9 @@ export default async function Artists () {
                     artists.map(data => (
                         <Card
                             key={data.id}
-                            title={data.title}
-                            imgUrl={data.cover_image}
-                            description={`Track ${data.track_number} • ${data.duration_seconds}s`}
+                            title={data.name}
+                            imgUrl={data.image}
+                            description={`Track ${data.genre}`}
                         >
                             {/* children — ปุ่มกดไป /artists/[id] */}
                             <Link href={`/artists/${data.id}`}>
