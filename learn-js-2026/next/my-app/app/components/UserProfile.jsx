@@ -1,14 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getUser } from "../libs/authentication";
+import supabase from "../libs/supabase";
 
 export default function UserProfile() {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        getUser().then(u => {
-            setUser(u) // ถ้า login แล้ว = มี user, ยังไม่ login = null
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            setUser(user)
         })
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null)
+        })
+
+        return () => subscription.unsubscribe()
     }, [])
 
     // ยังไม่ login → ไม่แสดงอะไร
